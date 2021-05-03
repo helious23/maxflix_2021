@@ -7,9 +7,9 @@ export default class extends React.Component {
   state = {
     movieResults: null,
     tvResults: null,
-    searchTerm: "",
     loading: false,
     error: null,
+    searchTerm: "",
   };
 
   handleSubmit = () => {
