@@ -7,14 +7,16 @@ const Container = styled.div`
   width: 100vw;
   display: flex;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 5rem;
   margin-top: 1.2rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #e50914;
+  letter-spacing: -5px;
 `;
 
 export default () => (
   <Container>
-    <span role="img" aria-label="Loading">
-      ⏳
-    </span>
+    <span>maxflex</span>
   </Container>
 );
