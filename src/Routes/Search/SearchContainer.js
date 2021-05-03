@@ -1,30 +1,49 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { moviesApi } from "api";
+import { moviesApi, tvApi } from "api";
 import React from "react";
 import SearchPresenter from "./SearchPresenter";
 
 export default class extends React.Component {
   state = {
     movieResults: null,
-    tvResult: null,
+    tvResults: null,
     searchTerm: "",
     loading: false,
     error: null,
   };
 
-  async componentDidMount() {
+  handleSubmit = () => {
+    const { searchTerm } = this.state;
+    if (searchTerm !== "") {
+      this.searchByTerm();
+    }
+  };
+
+  searchByTerm = async () => {
+    const { searchTerm } = this.state;
+    this.setState({ loading: true });
     try {
-      this.setState({});
+      const {
+        data: { results: movieResults },
+      } = await moviesApi.search(searchTerm);
+      const {
+        data: { results: tvResults },
+      } = await tvApi.search(searchTerm);
+
+      this.setState({
+        movieResults,
+        tvResults,
+      });
     } catch {
       this.setState({
-        error: "Can't search",
+        error: "Can't find results.",
       });
     } finally {
       this.setState({
-        loading: true,
+        loading: false,
       });
     }
-  }
+  };
   render() {
     const { movieResults, tvResult, searchTerm, loading, error } = this.state;
     return (
@@ -34,6 +53,7 @@ export default class extends React.Component {
         searchTerm={searchTerm}
         loading={loading}
         error={error}
+        handleSubmit={this.handleSubmit}
       />
     );
   }
