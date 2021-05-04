@@ -25,3 +25,7 @@ Movie app by React JS
 - [x] Collections Link
 - [x] /collections Route
 - [ ] On TV Show, seasons and creators
+
+# Preview
+
+Try it on [netilify](https://ecstatic-bell-57dac1.netlify.app/)
