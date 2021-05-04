@@ -20,8 +20,8 @@ Movie app by React JS
  - [x] Search (Movie, TV)
 
 ## Code Challenges
-- [ ] IMDB Link
-- [ ] Tabs inside of Movie / Show Details (Youtube Videos, Production Companies & Countries )
-- [ ] Collections Link
-- [ ] /collections Route
+- [x] IMDB Link
+- [x] Tabs inside of Movie / Show Details (Youtube Videos, Production Companies & Countries )
+- [x] Collections Link
+- [x] /collections Route
 - [ ] On TV Show, seasons and creators
