@@ -3,10 +3,10 @@ Movie app by React JS
 
 # Screens
 
-  - [ ] Home
-  - [ ] Tv Shows
-  - [ ] Search
-  - [ ] Detail
+  - [x] Home
+  - [x] Tv Shows
+  - [x] Search
+  - [x] Detail
 
 ## API Verbs
 
@@ -18,3 +18,10 @@ Movie app by React JS
  - [x] TV Show Detail
  - [x] Movie Detail
  - [x] Search (Movie, TV)
+
+## Code Challenges
+- [ ] IMDB Link
+- [ ] Tabs inside of Movie / Show Details (Youtube Videos, Production Companies & Countries )
+- [ ] Collections Link
+- [ ] /collections Route
+- [ ] On TV Show, seasons and creators

@@ -71,6 +71,8 @@ const Overview = styled.p`
   width: 50%;
 `;
 
+const Videos = styled.div``;
+
 const DetailPresenter = ({ result, loading, error }) =>
   loading ? (
     <>
@@ -133,6 +135,7 @@ const DetailPresenter = ({ result, loading, error }) =>
             </Item>
           </ItemContainer>
           <Overview>{result.overview}</Overview>
+          <Videos></Videos>
         </Data>
       </Content>
     </Container>
