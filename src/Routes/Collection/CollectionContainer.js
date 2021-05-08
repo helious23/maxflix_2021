@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import { collectionApi } from "api";
 import React from "react";
 import CollectionPresenter from "./CollectionPresenter";

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
