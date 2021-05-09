@@ -24,7 +24,7 @@ Movie app by React JS
 - [x] Tabs inside of Movie / Show Details (Youtube Videos, Production Companies & Countries )
 - [x] Collections Link
 - [x] /collections Route
-- [ ] On TV Show, seasons and creators
+- [x] On TV Show, seasons
 
 # Preview
 

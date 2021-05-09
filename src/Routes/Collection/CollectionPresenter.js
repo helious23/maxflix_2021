@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Message from "Components/Message";
 import Loader from "Components/Loader";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -54,31 +55,35 @@ const Data = styled.div`
   justify-content: center;
 `;
 
-const CollectionContainer = styled.div``;
-
-const CollectionPoster = styled.div`
-  margin-bottom: 10px;
-  height: 500px;
-  width: 300px;
-  background-image: url(${(props) => props.bgImage});
-  background-position: center center;
-  background-size: cover;
-  border-radius: 5px;
-`;
-
 const CollectionData = styled.div`
-  display: flex;
-  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
   height: 100%;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-top: 10px;
 `;
 
 const CollectionTitle = styled.div`
   font-size: 0.8rem;
-  line-height: 2;
   text-align: center;
+  line-height: 2;
   margin-bottom: 10px;
+`;
+
+const CollectionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const CollectionPoster = styled(Link)`
+  margin-bottom: 10px;
+  height: 350px;
+  width: 250px;
+  background-image: url(${(props) => props.bgimage});
+  background-position: center center;
+  background-size: cover;
+  border-radius: 5px;
 `;
 
 const CollectionPresenter = ({ result, loading, error }) =>
@@ -114,13 +119,19 @@ const CollectionPresenter = ({ result, loading, error }) =>
           <CollectionData>
             {result.parts.map((item) => (
               <CollectionContainer>
-                <CollectionTitle>{item.original_title}</CollectionTitle>
+                <CollectionTitle>
+                  {item.original_title.length > 30
+                    ? `${item.original_title.substring(0, 30)}...`
+                    : item.original_title}
+                </CollectionTitle>
                 <CollectionPoster
-                  bgImage={
+                  key={item.id}
+                  bgimage={
                     item.poster_path
                       ? `https://image.tmdb.org/t/p/original${item.poster_path}`
                       : require("../../assets/noPosterSmall.png").default
                   }
+                  to={`/movie/${item.id}`}
                 ></CollectionPoster>
               </CollectionContainer>
             ))}

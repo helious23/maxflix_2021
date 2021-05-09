@@ -46,6 +46,7 @@ const Cover = styled.div`
 
 const Data = styled.div`
   width: 70%;
+  height: 100%;
   margin-left: 10px;
 `;
 
@@ -69,7 +70,7 @@ const Overview = styled.p`
   font-size: 1rem;
   opacity: 0.7;
   line-height: 1.5;
-  width: 50%;
+  width: 80%;
 `;
 
 const IMDB = styled.a`
@@ -95,8 +96,9 @@ const Videos = styled.a`
 const ProductionContainer = styled.div`
   margin-top: 10px;
   display: grid;
-  grid-template-columns: repeat(5, 100px);
-  grid-template-rows: repeat(3, 100px);
+  height: 50px;
+  width: 80%;
+  grid-template-columns: repeat(auto-fill, 50px);
 `;
 
 const Company = styled.div`
@@ -113,6 +115,22 @@ const Collection = styled.div`
   font-size: 1rem;
   opacity: 0.7;
   line-height: 1.5;
+`;
+
+const SeriesContainer = styled.div`
+  margin-top: 10px;
+  width: 80%;
+  height: 40%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 80px);
+`;
+
+const Series = styled.div`
+  background-image: url(${(props) => props.bgimage});
+  background-position: center center;
+  background-size: 80%;
+  background-repeat: no-repeat;
+  border-radius: 5px;
 `;
 
 const DetailPresenter = ({ result, loading, error }) =>
@@ -160,9 +178,10 @@ const DetailPresenter = ({ result, loading, error }) =>
           </Title>
           <ItemContainer>
             <Item>
-              {result.release_date
+              {result.release_date && result.release_date !== null
                 ? result.release_date.substring(0, 4)
-                : result.first_air_date.substring(0, 4)}
+                : result.first_air_date !== null &&
+                  result.first_air_date.substring(0, 4)}
             </Item>
             <Divider
               key={result.runtime || result.episode_run_time}
@@ -173,7 +192,10 @@ const DetailPresenter = ({ result, loading, error }) =>
               ·
             </Divider>
             <Item>
-              {result.runtime ? result.runtime : result.episode_run_time[0]} min
+              {result.runtime && result.runtime !== ""
+                ? result.runtime
+                : result.episode_run_time[0]}{" "}
+              min
             </Item>
             <Divider
               key={result.genres}
@@ -251,6 +273,19 @@ const DetailPresenter = ({ result, loading, error }) =>
                 ></Company>
               ))}
           </ProductionContainer>
+          <SeriesContainer>
+            {result.seasons &&
+              result.seasons.map((season) => (
+                <Series
+                  key={season.id}
+                  bgimage={
+                    season.poster_path
+                      ? `https://image.tmdb.org/t/p/original${season.poster_path}`
+                      : require("../../assets/noPosterSmall.png").default
+                  }
+                ></Series>
+              ))}
+          </SeriesContainer>
         </Data>
       </Content>
     </Container>
