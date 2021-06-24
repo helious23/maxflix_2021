@@ -40,6 +40,9 @@ const ImageContainer = styled.div`
 const Title = styled.span`
   display: block;
   margin-bottom: 3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const Year = styled.span`
@@ -65,9 +68,7 @@ const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
           {rating}/10
         </Rating>
       </ImageContainer>
-      <Title>
-        {title.length > 15 ? `${title.substring(0, 17)}...` : title}
-      </Title>
+      <Title>{title}</Title>
       <Year>{year}</Year>
     </Container>
   </Link>

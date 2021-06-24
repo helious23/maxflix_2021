@@ -33,6 +33,7 @@ Section.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
+  // children PropTYles: google 검색 후 붙여넣기 ㅎㅎ
 };
 
 export default Section;

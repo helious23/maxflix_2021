@@ -111,7 +111,7 @@ const Company = styled.div`
   border-radius: 5px;
 `;
 
-const Collection = styled.div`
+const Collection = styled(Link)`
   font-size: 1rem;
   opacity: 0.7;
   line-height: 1.5;
@@ -142,7 +142,7 @@ const DetailPresenter = ({ result, loading, error }) =>
       <Loader />
     </>
   ) : error ? (
-    <Message />
+    <Message error={error} color="#e74c3c" />
   ) : (
     <Container>
       <Helmet>
@@ -256,9 +256,9 @@ const DetailPresenter = ({ result, loading, error }) =>
               ))}
           </VideosContainer>
           {result.belongs_to_collection && (
-            <Link to={`/collection/${result.belongs_to_collection.id}`}>
-              <Collection> 🎞 {result.belongs_to_collection.name}</Collection>
-            </Link>
+            <Collection to={`/collection/${result.belongs_to_collection.id}`}>
+              🎞 {result.belongs_to_collection.name}
+            </Collection>
           )}
           <ProductionContainer>
             {result.production_companies &&
@@ -291,7 +291,7 @@ const DetailPresenter = ({ result, loading, error }) =>
     </Container>
   );
 
-DetailPresenter.propTyles = {
+DetailPresenter.propTypes = {
   result: PropTypes.object,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.string,
