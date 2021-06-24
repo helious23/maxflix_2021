@@ -9,13 +9,41 @@ export default class extends React.Component {
     popular: null,
     error: null,
     loading: true,
+    page: 1,
+  };
+
+  nextPage = async (next) => {
+    this.setState({
+      page: next,
+    });
+    const {
+      data: { results: nowPlaying },
+    } = await moviesApi.nowPlaying(next);
+    this.setState({
+      nowPlaying,
+    });
+  };
+
+  previousPage = async (prev) => {
+    if (prev >= 1) {
+      this.setState({
+        page: prev,
+      });
+      const {
+        data: { results: nowPlaying },
+      } = await moviesApi.nowPlaying(prev);
+      this.setState({
+        nowPlaying,
+      });
+    }
   };
 
   async componentDidMount() {
+    const { page } = this.state;
     try {
       const {
         data: { results: nowPlaying },
-      } = await moviesApi.nowPlaying();
+      } = await moviesApi.nowPlaying(page);
       const {
         data: { results: upcoming },
       } = await moviesApi.upcoming();
@@ -39,7 +67,8 @@ export default class extends React.Component {
   }
 
   render() {
-    const { nowPlaying, upcoming, popular, error, loading } = this.state;
+    const { nowPlaying, upcoming, popular, error, loading, page } = this.state;
+
     return (
       <HomePresenter
         nowPlaying={nowPlaying}
@@ -47,6 +76,9 @@ export default class extends React.Component {
         popular={popular}
         error={error}
         loading={loading}
+        page={page}
+        nextPage={this.nextPage}
+        previousPage={this.previousPage}
       />
     );
   }
