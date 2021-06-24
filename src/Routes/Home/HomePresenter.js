@@ -46,6 +46,12 @@ const HomePresenter = ({
   page,
   nextPage,
   previousPage,
+  upcomingPage,
+  upcomingPrev,
+  upcomingNext,
+  popularPage,
+  popularPrev,
+  popularNext,
 }) => {
   return (
     <>
@@ -84,6 +90,12 @@ const HomePresenter = ({
           )}
           {upcoming && upcoming.length > 0 && (
             <Section title="Upcoming">
+              <PrevPage
+                page={upcomingPage - 0.9}
+                onClick={() => upcomingPrev(upcomingPage - 1)}
+              >
+                ⬅
+              </PrevPage>
               {upcoming.map((movie) => (
                 <Poster
                   key={movie.id}
@@ -97,10 +109,22 @@ const HomePresenter = ({
                   isMovie={true}
                 />
               ))}
+              <NextPage
+                page={upcomingPage}
+                onClick={() => upcomingNext(upcomingPage + 1)}
+              >
+                ➡
+              </NextPage>
             </Section>
           )}
           {popular && popular.length > 0 && (
             <Section title="Popular Movies">
+              <PrevPage
+                page={popularPage - 0.9}
+                onClick={() => popularPrev(popularPage - 1)}
+              >
+                ⬅
+              </PrevPage>
               {popular.map((movie) => (
                 <Poster
                   key={movie.id}
@@ -114,6 +138,12 @@ const HomePresenter = ({
                   isMovie={true}
                 />
               ))}
+              <NextPage
+                page={popularPage}
+                onClick={() => popularNext(popularPage + 1)}
+              >
+                ➡
+              </NextPage>
             </Section>
           )}
           {error && <Message color="#e74c3c" text={error} />}
@@ -131,6 +161,12 @@ HomePresenter.propTyles = {
   error: PropTypes.string,
   page: PropTypes.number.isRequired,
   nextPage: PropTypes.func.isRequired,
+  upcomingPrev: PropTypes.func.isRequired,
+  upcomingNext: PropTypes.func.isRequired,
+  popularPrev: PropTypes.func.isRequired,
+  popularNext: PropTypes.func.isRequired,
+  upcomingPage: PropTypes.number.isRequired,
+  popularPage: PropTypes.number.isRequired,
 };
 
 export default HomePresenter;

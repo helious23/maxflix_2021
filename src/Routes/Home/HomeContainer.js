@@ -10,6 +10,8 @@ export default class extends React.Component {
     error: null,
     loading: true,
     page: 1,
+    upcomingPage: 1,
+    popularPage: 1,
   };
 
   nextPage = async (next) => {
@@ -34,6 +36,58 @@ export default class extends React.Component {
       } = await moviesApi.nowPlaying(prev);
       this.setState({
         nowPlaying,
+      });
+    }
+  };
+
+  upcomingNext = async (next) => {
+    this.setState({
+      upcomingPage: next,
+    });
+    const {
+      data: { results: upcoming },
+    } = await moviesApi.upcoming(next);
+    this.setState({
+      upcoming,
+    });
+  };
+
+  upcomingPrev = async (prev) => {
+    if (prev >= 1) {
+      this.setState({
+        upcomingPage: prev,
+      });
+      const {
+        data: { results: upcoming },
+      } = await moviesApi.upcoming(prev);
+      this.setState({
+        upcoming,
+      });
+    }
+  };
+
+  popularNext = async (next) => {
+    this.setState({
+      popularPage: next,
+    });
+    const {
+      data: { results: popular },
+    } = await moviesApi.popular(next);
+    this.setState({
+      popular,
+    });
+  };
+
+  popularPrev = async (prev) => {
+    if (prev >= 1) {
+      this.setState({
+        popularPage: prev,
+      });
+      const {
+        data: { results: popular },
+      } = await moviesApi.popular(prev);
+      this.setState({
+        popular,
       });
     }
   };
@@ -67,7 +121,16 @@ export default class extends React.Component {
   }
 
   render() {
-    const { nowPlaying, upcoming, popular, error, loading, page } = this.state;
+    const {
+      nowPlaying,
+      upcoming,
+      popular,
+      error,
+      loading,
+      page,
+      upcomingPage,
+      popularPage,
+    } = this.state;
 
     return (
       <HomePresenter
@@ -79,6 +142,12 @@ export default class extends React.Component {
         page={page}
         nextPage={this.nextPage}
         previousPage={this.previousPage}
+        upcomingNext={this.upcomingNext}
+        upcomingPrev={this.upcomingPrev}
+        upcomingPage={upcomingPage}
+        popularNext={this.popularNext}
+        popularPrev={this.popularPrev}
+        popularPage={popularPage}
       />
     );
   }

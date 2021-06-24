@@ -15,8 +15,18 @@ export const moviesApi = {
         page,
       },
     }),
-  upcoming: () => api.get("movie/upcoming"),
-  popular: () => api.get("movie/popular"),
+  upcoming: (page) =>
+    api.get("movie/upcoming", {
+      params: {
+        page,
+      },
+    }),
+  popular: (page) =>
+    api.get("movie/popular", {
+      params: {
+        page,
+      },
+    }),
   movieDetail: (id) =>
     api.get(`movie/${id}`, {
       params: {
