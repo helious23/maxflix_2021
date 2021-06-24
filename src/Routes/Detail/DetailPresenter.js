@@ -178,9 +178,9 @@ const DetailPresenter = ({ result, loading, error }) =>
           </Title>
           <ItemContainer>
             <Item>
-              {result.release_date && result.release_date !== null
+              {result.release_date && result.release_date !== undefined
                 ? result.release_date.substring(0, 4)
-                : result.first_air_date !== null &&
+                : result.first_air_date !== undefined &&
                   result.first_air_date.substring(0, 4)}
             </Item>
             <Divider
@@ -192,10 +192,10 @@ const DetailPresenter = ({ result, loading, error }) =>
               ·
             </Divider>
             <Item>
-              {result.runtime && result.runtime !== ""
-                ? result.runtime
-                : result.episode_run_time[0]}{" "}
-              min
+              {result.runtime && result.runtime !== undefined
+                ? `${result.runtime} min`
+                : result.episode_run_time !== undefined &&
+                  `${result.episode_run_time[0]} min`}
             </Item>
             <Divider
               key={result.genres}
